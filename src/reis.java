@@ -1,30 +1,23 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class reis {
-
     private String beginstation;
     private String eindstation;
     private double prijs;
-    public String formattedTime;
 
-    public reis(String beginstation, String eindstation, double prijs, String formattedTime) {
+    public reis(String beginstation, String eindstation, double prijs) {
         this.beginstation = beginstation;
         this.eindstation = eindstation;
         this.prijs = prijs;
-        this.formattedTime = formattedTime;
-
     }
 
     public double berekenPrijs() {
         return prijs;
     }
 
-    public String beginstation() {
+    public String getBeginstation() {
         return beginstation;
     }
 
-    public String eindstation() {
+    public String getEindstation() {
         return eindstation;
     }
 }

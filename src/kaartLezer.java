@@ -1,7 +1,4 @@
-import java.time.LocalDate;
-
 public class kaartLezer {
-
     private String locatie;
     private int lezerId;
 
@@ -10,7 +7,8 @@ public class kaartLezer {
         this.lezerId = lezerId;
     }
 
-    public boolean leeskaart(ovChipKaart kaart) {
+    public boolean leesKaart(ovChipKaart kaart) {
+        System.out.println("Kaart gelezen bij " + locatie);
         return true;
     }
 }
