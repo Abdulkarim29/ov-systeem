@@ -11,6 +11,10 @@ public class Main {
         reis reis = new reis("Nijmegen Centraal", "Arnhem Centraal", 10.0);
         automaat automaat = new automaat("Nijmegen Centraal", 101);
 
+        System.out.println("Welkom in Nijmegen 🚉");
+        System.out.println("Maak een keuze wat uw wilt doen ");
+        System.out.println("Veel succes");
+
         boolean actief = true;
 
         while (actief) {
