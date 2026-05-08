@@ -1,9 +1,9 @@
-public class reis {
+public class Reis {
     private String beginstation;
     private String eindstation;
     private double prijs;
 
-    public reis(String beginstation, String eindstation, double prijs) {
+    public Reis(String beginstation, String eindstation, double prijs) {
         this.beginstation = beginstation;
         this.eindstation = eindstation;
         this.prijs = prijs;
@@ -19,5 +19,9 @@ public class reis {
 
     public String getEindstation() {
         return eindstation;
+    }
+
+    public double getPrijs() {
+        return prijs;
     }
 }

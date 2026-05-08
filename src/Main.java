@@ -6,18 +6,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        ovChipKaart kaart = new ovChipKaart("1218194", 20.0, LocalDate.of(2026, 3, 27));
-        kaartLezer lezer = new kaartLezer("Nijmegen Centraal", 1);
-        reis reis = new reis("Nijmegen Centraal", "Arnhem Centraal", 10.0);
-        automaat automaat = new automaat("Nijmegen Centraal", 101);
+        OvChipKaart kaart = new OvChipKaart("1218194", 20.0, LocalDate.of(2026, 3, 27));
+        KaartLezer lezer = new KaartLezer("Nijmegen Centraal", 1);
+        Reis reis = new Reis("Nijmegen Centraal", "Arnhem Centraal", 10.0);
+        Automaat automaat = new Automaat("Nijmegen Centraal", 101);
 
-        System.out.println("Welkom in Nijmegen 🚉");
-        System.out.println("Maak een keuze wat uw wilt doen ");
-        System.out.println("Veel succes");
+        System.out.println("Welkom in Nijmegen");
+        System.out.println("Maak een keuze uit het menu.");
+        System.out.println("Veel succes!");
 
         boolean actief = true;
 
         while (actief) {
+            System.out.println();
             System.out.println("===== MENU =====");
             System.out.println("1. Inchecken");
             System.out.println("2. Uitchecken");
@@ -31,33 +32,34 @@ public class Main {
 
             switch (keuze) {
                 case 1:
-                    if (!kaart.isIngecheckt()) {
-                        if (lezer.leesKaart(kaart)) {
-                            kaart.inchecken(reis.getBeginstation(), LocalDateTime.now());
-                        } else {
-                            System.out.println("Kaart kon niet gelezen worden.");
-                        }
-                    } else {
+                    if (kaart.isIngecheckt()) {
                         System.out.println("Je bent al ingecheckt.");
+                    } else if (!lezer.leesKaart(kaart)) {
+                        System.out.println("Kaart kon niet gelezen worden of is niet geldig.");
+                    } else if (!kaart.heeftVoldoendeSaldo(reis.berekenPrijs())) {
+                        System.out.println("Je hebt onvoldoende saldo om in te checken.");
+                        System.out.println("Huidig saldo: € " + kaart.getSaldo());
+                        System.out.println("Benodigd saldo: € " + reis.berekenPrijs());
+                    } else {
+                        kaart.inchecken(reis.getBeginstation(), kaart.getTime());
                     }
                     break;
 
                 case 2:
-                    if (kaart.isIngecheckt()) {
-                        kaart.uitchecken(reis.getEindstation(), LocalDateTime.now(), reis.berekenPrijs());
-                        System.out.println("Nieuw saldo: " + kaart.getSaldo());
-                    } else {
+                    if (!kaart.isIngecheckt()) {
                         System.out.println("Je bent nog niet ingecheckt.");
+                    } else {
+                        kaart.uitchecken(reis.getEindstation(), kaart.getTime(), reis.berekenPrijs());
                     }
                     break;
 
                 case 3:
-                    System.out.println("Saldo: " + kaart.getSaldo());
+                    System.out.println("Saldo: € " + kaart.getSaldo());
                     break;
 
                 case 4:
                     System.out.println("Reis van " + reis.getBeginstation() + " naar " + reis.getEindstation());
-                    System.out.println("Prijs: " + reis.berekenPrijs());
+                    System.out.println("Prijs: € " + reis.berekenPrijs());
                     break;
 
                 case 5:
@@ -72,7 +74,7 @@ public class Main {
                     break;
 
                 default:
-                    System.out.println("Ongeldige keuze.");
+                    System.out.println("Ongeldige keuze. Kies een nummer van 1 tot en met 6.");
             }
         }
 
